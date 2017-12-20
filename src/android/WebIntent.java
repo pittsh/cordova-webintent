@@ -164,7 +164,7 @@ public class WebIntent extends CordovaPlugin {
         }
     }
 
-    void startActivity(String action, Uri uri, String type, Map<String, String> extras) {
+    void startActivity(String action, Uri uri, String type, List<int> flags, Map<String, String> extras) {
         Intent i = uri != null ? new Intent(action, uri) : new Intent(action);
 
         if (type != null && uri != null) {
@@ -173,6 +173,10 @@ public class WebIntent extends CordovaPlugin {
             if (type != null) {
                 i.setType(type);
             }
+        }
+
+        for (String flag : flags) {
+            i.addFlag( flag );
         }
 
         for (Map.Entry<String, String> entry : extras.entrySet()) {
